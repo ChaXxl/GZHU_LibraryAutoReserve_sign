@@ -12,7 +12,7 @@
 ├── libs
 │   ├── __init__.py
 │   ├── info.py      保存个人信息
-│   ├── rsa.py RSA   加密算法的实现
+│   ├── rsa.py      RSA 加密算法的实现
 │   └── source.py   核心代码
 ├── requirements.txt 依赖项
 ├── reserve.py       预约
