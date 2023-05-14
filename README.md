@@ -80,8 +80,16 @@
          
          两个函数示例：
          ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/59721804-99dc-4631-997b-f5b72457cfb4)
+         
+   6. 点击打开终端，输入以下命令安装依赖项
+      * `-t .`: 表示将依赖安装置该目录下
+      * `-r `: 指定对应的 requirements.txt 文件, 去安装这个文件里面的包     
+      ~~~shell
+      pip install -t . -r requirements.txt
+      ~~~
+      ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/dba1416d-9504-44ad-8b87-96b457b27e3f)
       
-   6. 配置触发器
+   7. 配置触发器
       * 触发器类型：选择异步调用
       * 触发器名称：随便起个
       
@@ -94,7 +102,7 @@
         ~~~shell
         CRON_TZ=Asia/Shanghai 0 31,35,55 8,12,13,16,20 * * *
         ~~~     
-   7.  代码上传后记得点击部署，也可以点一下测试函数看看能不能正常运行，只要有输出就说明正常，`不用管它的报错`
+   8.  代码上传后记得点击部署，也可以点一下测试函数看看能不能正常运行，只要有输出就说明正常，`不用管它的报错`
    
       ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/1ffc4d34-9691-4291-bc6d-e813bcdb1581)
 
