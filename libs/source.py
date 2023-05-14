@@ -311,7 +311,7 @@ class ZWYT(object):
             elif re.findall('预约时间要大于当前时间', message):
                 print(colorama.Style.BRIGHT + colorama.Fore.YELLOW + '预约时间要大于当前时间')
 
-            # 预约失败, 则向微信推送预约失败的信息
+            # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
                 print(
                     colorama.Style.BRIGHT + colorama.Fore.RED + f"""\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}""")
