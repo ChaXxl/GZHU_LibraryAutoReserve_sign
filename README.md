@@ -95,6 +95,7 @@
         CRON_TZ=Asia/Shanghai 0 31,35,55 8,12,13,16,20 * * *
         ~~~     
    7.  代码上传后记得点击部署，也可以点一下测试函数看看能不能正常运行，只要有输出就说明正常，`不用管它的报错`
+   
       ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/1ffc4d34-9691-4291-bc6d-e813bcdb1581)
 
 
