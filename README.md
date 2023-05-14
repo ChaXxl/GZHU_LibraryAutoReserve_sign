@@ -65,10 +65,45 @@
       ![image-20230514115141532](https://img-blog.csdnimg.cn/0e99a68cb9294e0c9185887bb7e8839b.png)
 
    3. 点管理控制台
+   4. 选择服务及函数，再点击创建服务，随便给个名字，例如我取名叫 `Library`
+      ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/31bc937b-8f67-4579-b6ae-bb280fb77f1b)
+   5. 创建`两个函数`，分别用于预约和签到。
+         * 创建函数的方式：使用自定义运行时创建
+         * 名字：可以叫做 `reserve` 和 `sign`，随意
+         * 代码上传方式：可以选择通过文件夹上传代码，反正上传代码就行
+         * 预约函数的启动命令：`python reserve.py`
+         * 签到函数的启动命令：`python sign.py`
+         * 监听端口：这个我们用不到，随便填个9000即可
+         * 其余参数默认即可
+         
+         <br/>
+         
+         两个函数示例：
+         ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/59721804-99dc-4631-997b-f5b72457cfb4)
+      
+   6. 配置触发器
+      * 触发器类型：选择异步调用
+      * 触发器名称：随便起个
+      
+      * 预约函数的触发方式可以选我这个，我这个是每天 6:15:20 触发的意思
+        ~~~shell
+        CRON_TZ=Asia/Shanghai 20 15 6 * * *
+        ~~~
+      ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/7894b695-0eb0-4f90-8400-0cbed5ff23dd)
+      * 签到函数的触发方式，我这个是每天的 8:31、12:31、16:31、20:31 触发
+        ~~~shell
+        CRON_TZ=Asia/Shanghai 0 31,35,55 8,12,13,16,20 * * *
+        ~~~     
+   7.  代码上传后记得点击部署，也可以点一下测试函数看看能不能正常运行，只要有输出就说明正常，`不用管它的报错`
+      ![image](https://github.com/ChaXxl/GZHU_LibraryAutoReserve_sign/assets/40326898/1ffc4d34-9691-4291-bc6d-e813bcdb1581)
 
-   <br/>
 
-   # 写文档好烦，不想写了。。。。。
+      
+      
+      
+
+
+   
 
       
 
