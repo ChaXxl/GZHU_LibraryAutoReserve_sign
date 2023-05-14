@@ -1,19 +1,23 @@
 # 项目结构
 
-> ├── README.md
-> ├── json	保存每个房间和座位的信息
-> │   ├── 101.json
-> │   ├── 301.json
-> │   ├── 303.json
-> │   └── ………
-> ├── libs
-> │   ├── \_\_init\_\_.py
-> │   ├── info.py	  保存个人信息
-> │   ├── rsa.py	   RSA 加密算法的实现
-> │   └── source.py    核心代码
-> ├── requirements.txt 依赖项
-> ├── reserve.py	   预约
-> └── sign.py		  签到
+~~~shell
+├── README.md
+├── json 保存每个房间和座位的信息
+│   ├── 101.json
+│   ├── 202.json
+│   ├── 203.json
+│   ├── 204.json
+│   ├── 205.json
+│   ├── ........
+├── libs
+│   ├── __init__.py
+│   ├── info.py 保存个人信息
+│   ├── rsa.py RSA 加密算法的实现
+│   └── source.py 核心代码
+├── requirements.txt 依赖项
+├── reserve.py 预约
+└── sign.py 签到
+~~~
 
 <br/><br/>
 
