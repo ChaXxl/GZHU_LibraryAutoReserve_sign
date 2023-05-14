@@ -2,7 +2,7 @@
 
 ~~~shell
 ├── README.md
-├── json 保存每个房间和座位的信息
+├── json             保存每个房间和座位的信息
 │   ├── 101.json
 │   ├── 202.json
 │   ├── 203.json
