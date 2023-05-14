@@ -39,6 +39,12 @@
 3. 修改 `libs\info.py`文件，填上自己的学号、密码以及要预约的座位号
 
 4. 运行 `reserve.py`即可预约，运行 `sign.py`可签到
+   ~~~shell
+   python reserve.py
+   ~~~
+   ~~~shell
+   python sign.py
+   ~~~
 
 <br/>
 
