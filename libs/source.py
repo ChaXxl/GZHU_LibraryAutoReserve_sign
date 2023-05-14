@@ -86,13 +86,18 @@ class ZWYT(object):
     # 取对应座位的 resvDev、devId
     def get_seat_resvDev(self, devName: str):
         """
-        devName: 座位编号. 比如 101-011、202-030、3c-011、3c-212
+        devName: 座位编号. 比如 101-011、202-030、3c-011、3c-212、M301-1
         """
         resvDev = None
         filename = devName.strip().split('-')[0]  # 移除传入的座位名头尾的空格后再分割传入的座位名称
+       
+        # 预约的是琴房
+        if filename[0] == 'M':
+            json_path = Path().cwd() / 'json/琴房.json'         # 准备打开的 json 文件的路径
+        else:
+            json_path = Path().cwd() / f'json/{filename}.json'  # 准备打开的 json 文件的路径
 
         # 打开对应的 json 文件
-        json_path = Path().cwd() / f'json/{filename}.json'
         with open(json_path, mode='r', encoding='utf-8') as f:
             json_data = json.load(f)
 
