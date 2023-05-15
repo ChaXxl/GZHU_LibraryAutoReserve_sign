@@ -275,7 +275,7 @@ class ZWYT(object):
             elif re.findall('当前时段有预约', message):
                 print(
                     "\033[0;33m" +
-                    {self.name}, 在这个时间段内已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']} +
+                    f"{self.name}, 在这个时间段内已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" +
                     "\033[0m"
                 )
               
