@@ -4,7 +4,6 @@ import typing
 from datetime import datetime, timedelta
 from pathlib import Path
 
-import colorama         # pip install colorama
 import httpx            # pip install httpx
 from lxml import etree  # pip install lxml
 
@@ -19,7 +18,7 @@ class ZWYT(object):
         self.name = name                    # 名字
         self.username = str(username)       # 学号
         self.password = str(password)       # 密码
-        colorama.init(autoreset=True)       # 控制打印输出的颜色
+        # colorama.init(autoreset=True)       # 控制打印输出的颜色
 
         # url接口
         self.urls = {
@@ -51,7 +50,6 @@ class ZWYT(object):
         # 初始化请求连接对象
         self.rr = httpx.Client()
 
-    # TODO: 把请求封装成一个函数
     def get_response(self, url, method, params, headers, data):
         """
         发起请求, 获取响应
@@ -268,27 +266,23 @@ class ZWYT(object):
             # 预约成功
             if message == '新增成功':
                 print(
-                    colorama.Style.BRIGHT + colorama.Fore.GREEN + 
-                    f"\n预约成功: {self.name} 预约了 {devName}: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}"
+                    "\033[0;32m" + 
+                    f"\n预约成功: {self.name} 预约了 {devName}: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" + 
+                    "\033[0m"
                 )
 
             # 该时间段有预约了
             elif re.findall('当前时段有预约', message):
-                print(
-                    colorama.Style.BRIGHT + colorama.Fore.YELLOW + 
-                    f"{self.name} 在该时段内已经有预约了 {devName}: 起始时间:{json_data['resvBeginTime']}, 结束时间:{json_data['resvEndTime']}"
-                )
-
-            elif re.findall('预约时间要大于当前时间', message):
-                print(colorama.Style.BRIGHT + colorama.Fore.YELLOW + '预约时间要大于当前时间')
-
+                print("\033[0;33m" + "当前时段已经有了预约" + "\033[0m")
+              
             # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
                 print(
-                    colorama.Style.BRIGHT + colorama.Fore.RED + 
-                    f"\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}"
+                    "\033[0;31m" + 
+                    f"\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}" +
+                    "\033[0m"
                 )
-
+            
     # 签到
     def sign(self, devName):
         """
@@ -313,10 +307,7 @@ class ZWYT(object):
 
         # 预约座位的编号不对
         if res1_data.get('data') is None:
-            print(
-                colorama.Style.BRIGHT + colorama.Fore.YELLOW +
-                f"{res1_data.get('message')}"
-            )
+            print("\033[0;31m" + f"{res1_data.get('message')}" + "\033[0m")
             return
 
         # 暂无预约
@@ -335,21 +326,12 @@ class ZWYT(object):
 
         # 签到成功
         if message == '操作成功':
-            print(
-                colorama.Style.BRIGHT + colorama.Fore.GREEN +
-                f"\n{self.name} 签到成功--{message}\n"
-            )
+            print("\033[0;32m" + f"\n{self.name} 签到成功--{message}\n" + "\033[0m")
 
         # 已经签到过
         elif message == '用户已签到，请勿重复签到':
-            print(
-                colorama.Style.BRIGHT + colorama.Fore.YELLOW +
-                f'\n {self.name} 用户已签到, 请勿重复签到\n'
-            )
+            print("\033[0;33m" + f'\n {self.name} 用户已签到, 请勿重复签到\n' + "\033[0m")
 
         # 签到失败
         else:
-            print(
-                colorama.Style.BRIGHT + colorama.Fore.RED +
-                f"\n{self.name}--签到失败--{message}\n"
-            )
+            print("\033[0;31m" + f"\n{self.name}--签到失败--{message}\n" + "\033[0m")
