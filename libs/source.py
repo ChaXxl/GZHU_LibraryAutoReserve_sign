@@ -254,8 +254,8 @@ class ZWYT(object):
                 "appAccNo": appAccNo,
                 "memberKind": 1,
                 "resvMember": [appAccNo],           # 读者个人编号
-                "resvBeginTime": date.get('start'), # 预约起始时间
-                "resvEndTime": date.get('end'),     # 预约结束时间
+                "resvBeginTime": date['start'],     # 预约起始时间
+                "resvEndTime": date['end'],         # 预约结束时间
                 "testName": "",
                 "captcha": "",
                 "resvProperty": 0,
