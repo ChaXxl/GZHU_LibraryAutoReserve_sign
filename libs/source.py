@@ -192,7 +192,7 @@ class ZWYT(object):
         self.urls['login_url'] = res.headers.get('Location')
 
     # 获取预约日期
-    def get_reverse_date(self) -> typing.List:
+    def get_reserve_date(self) -> typing.List:
         """
         功能: 返回预约的日期和时间
         return: 返回一个列表, 列表里面每个元素是一个字典, 字典里面有每天的 start(开始时间) 和 end(结束时间)
@@ -248,7 +248,7 @@ class ZWYT(object):
         print('\n')  # 换行
 
         # 遍历所有日期, 进行预约
-        for date in self.get_reverse_date():
+        for date in self.get_reserve_date():
             json_data = {
                 "sysKind": 8,
                 "appAccNo": appAccNo,
