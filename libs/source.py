@@ -330,7 +330,7 @@ class ZWYT(object):
 
         # 已经签到过
         elif message == '用户已签到，请勿重复签到':
-            print("\033[0;33m" + f'\n {self.name} 用户已签到, 请勿重复签到\n' + "\033[0m")
+            print("\033[0;33m" + f'\n {self.name} {message}\n' + "\033[0m")
 
         # 签到失败
         else:
