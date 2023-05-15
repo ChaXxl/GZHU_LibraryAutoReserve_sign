@@ -51,6 +51,7 @@ class ZWYT(object):
         # 初始化请求连接对象
         self.rr = httpx.Client()
 
+    # TODO: 把请求封装成一个函数
     def get_response(self, url, method, params, headers, data):
         """
         发起请求, 获取响应
