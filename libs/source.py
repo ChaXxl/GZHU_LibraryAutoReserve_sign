@@ -1,7 +1,7 @@
 import json
 import re
 import typing
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import colorama         # pip install colorama
@@ -190,77 +190,38 @@ class ZWYT(object):
     def get_reverse_date(self) -> typing.List:
         """
         功能: 返回预约的日期和时间
-        return: 返回一个列表, 列表里面每个元素是一个字典, 字典里面有start(开始时间)和end(结束时间)
+        return: 返回一个列表, 列表里面每个元素是一个字典, 字典里面有每天的 start(开始时间) 和 end(结束时间)
         """
         # 预约时间段
         hours = (
-            ('8:30:00', '12:30:00'), ('12:30:00', '16:30:00'), ('16:30:00', '20:30:00'), ('20:30:00', '21:45:00')
+            ('8:30:00', '12:30:00'), 
+            ('12:30:00', '16:30:00'), 
+            ('16:30:00', '20:30:00'), 
+            ('20:30:00', '21:45:00')
         )
 
-        # 获取当前的 年份、月份、天
-        year, month, day = int(datetime.now().year), int(datetime.now().month), int(datetime.now().day)
+        current_day = datetime.now()                # 今天的日期
+        next_day = current_day + timedelta(days=1)  # 明天的日期
+
+        # 获取 年、月、日
+        c_year, c_month, c_day = current_day.year, current_day.month, current_day.day
+        n_year, n_month, n_day = next_day.year, next_day.month, next_day.day
 
         # 要返回的数据
-        reverse_days = []
-
-        # 保存每个字典
-        date_list = []
-
-        # 有31天的月份
-        if month in (1, 3, 5, 7, 8, 10):
-            if day == 31:
-                date_list.append({'year': year, 'month': month, 'day': 31})
-                date_list.append({'year': year, 'month': month + 1, 'day': 1})
-            else:
-                date_list.append({'year': year, 'month': month, 'day': day})
-                date_list.append({'year': year, 'month': month, 'day': day + 1})
-
-        # 2月份
-        elif month == 2:
-            # 闰年 == 能被 4 整除, 但不能被 100 整除的年份
-            if year % 4 == 0 and year % 100 != 0:
-                if day == 29:
-                    date_list.append({'year': year, 'month': month, 'day': 29})
-                    date_list.append({'year': year, 'month': month + 1, 'day': 1})
-                else:
-                    date_list.append({'year': year, 'month': month, 'day': day})
-                    date_list.append({'year': year, 'month': month, 'day': day + 1})
-            # 平年
-            else:
-                if day == 28:
-                    date_list.append({'year': year, 'month': month, 'day': 28})
-                    date_list.append({'year': year, 'month': month + 1, 'day': 1})
-                else:
-                    date_list.append({'year': year, 'month': month, 'day': day})
-                    date_list.append({'year': year, 'month': month, 'day': day + 1})
-
-        # 12月份
-        elif month == 12:
-            if day == 31:
-                date_list.append({'year': year, 'month': month, 'day': 31})
-                date_list.append({'year': year + 1, 'month': 1, 'day': 1})  # 新的一年 1 月份
-            else:
-                date_list.append({'year': year, 'month': month, 'day': day})
-                date_list.append({'year': year, 'month': month, 'day': day + 1})
-
-        # 其它的就是每个月 30天的月份
-        else:
-            if day == 30:
-                date_list.append({'year': year, 'month': month, 'day': 30})
-                date_list.append({'year': year, 'month': month + 1, 'day': 1})
-            else:
-                date_list.append({'year': year, 'month': month, 'day': day})
-                date_list.append({'year': year, 'month': month, 'day': day + 1})
+        reserve_days = []
 
         # 添加起始和结束时间
-        for i in date_list:
-            for hour in hours:
-                reverse_days.append({
-                    # 起始时间
-                    'start': f"{i.get('year')}-{i.get('month')}-{i.get('day')} {hour[0]}",
-                    # 结束时间
-                    'end': f"{i.get('year')}-{i.get('month')}-{i.get('day')} {hour[-1]}"
-                })
+        for hour in hours:
+            reserve_days.append(
+                {
+                    'start': f"{c_year}-{c_month}-{c_day} {hour[0]}",   # 今天--起始时间
+                    'end': f"{c_year}-{c_month}-{c_day} {hour[-1]}"     # 今天--结束时间
+                },
+                {
+                    'start': f"{n_year}-{n_month}-{n_day} {hour[0]}",   # 明天--起始时间
+                    'end': f"{n_year}-{n_month}-{n_day} {hour[-1]}"     # 明天--结束时间
+                }
+            )
         return reverse_days
 
     # 预约
@@ -286,13 +247,13 @@ class ZWYT(object):
                 "sysKind": 8,
                 "appAccNo": appAccNo,
                 "memberKind": 1,
-                "resvMember": [appAccNo],  # 读者个人编号
-                "resvBeginTime": date.get('start'),  # 预约起始时间
-                "resvEndTime": date.get('end'),  # 预约结束时间
+                "resvMember": [appAccNo],           # 读者个人编号
+                "resvBeginTime": date.get('start'), # 预约起始时间
+                "resvEndTime": date.get('end'),     # 预约结束时间
                 "testName": "",
                 "captcha": "",
                 "resvProperty": 0,
-                "resvDev": [self.resvDev],  # 座位编号
+                "resvDev": [self.resvDev],          # 座位编号
                 "memo": ""
             }
 
