@@ -212,7 +212,7 @@ class ZWYT(object):
 
         # 添加起始和结束时间
         for hour in hours:
-            reserve_days.append(
+            reserve_days.extend([
                 {
                     'start': f"{c_year}-{c_month}-{c_day} {hour[0]}",   # 今天--起始时间
                     'end': f"{c_year}-{c_month}-{c_day} {hour[-1]}"     # 今天--结束时间
@@ -221,8 +221,8 @@ class ZWYT(object):
                     'start': f"{n_year}-{n_month}-{n_day} {hour[0]}",   # 明天--起始时间
                     'end': f"{n_year}-{n_month}-{n_day} {hour[-1]}"     # 明天--结束时间
                 }
-            )
-        return reverse_days
+            ])
+        return reserve_days
 
     # 预约
     def reserve(self, devName):
