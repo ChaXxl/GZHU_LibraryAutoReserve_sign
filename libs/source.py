@@ -18,7 +18,6 @@ class ZWYT(object):
         self.name = name                    # 名字
         self.username = str(username)       # 学号
         self.password = str(password)       # 密码
-        # colorama.init(autoreset=True)       # 控制打印输出的颜色
 
         # url接口
         self.urls = {
@@ -50,6 +49,7 @@ class ZWYT(object):
         # 初始化请求连接对象
         self.rr = httpx.Client()
 
+    # TODO: 整理请求为一个函数
     def get_response(self, url, method, params, headers, data):
         """
         发起请求, 获取响应
@@ -82,14 +82,15 @@ class ZWYT(object):
         res = self.rr.get(url=self.urls['reserve'], params=params, headers=self.headers)
         json_data = res.json()
 
-    # 取对应座位的 resvDev、devId
-    def get_seat_resvDev(self, devName: str):
+    # 取对应座位的 resvDev、devSn
+    def get_seat_resvDev_devSn(self, devName: str, tag: str):
         """
-        devName: 座位编号. 比如 101-011、202-030、3c-011、3c-212、M301-1
+        tag: 用于判断是预约还是签到。预约需要去json文件获取resvId、签到需要去json文件获取devSn
+        devName: 座位编号. 比如 101-011、202-030、3c-011、3c-212、M301-001
         """
         resvDev = None
         filename = devName.strip().split('-')[0]  # 移除传入的座位名头尾的空格后再分割传入的座位名称
-       
+        
         # 预约的是琴房
         if filename[0] == 'M':
             json_path = Path().cwd() / 'json/琴房.json'         # 准备打开的 json 文件的路径
@@ -103,8 +104,13 @@ class ZWYT(object):
         # 遍历获取对应座位的 devId
         for i in json_data.get('data'):
             if i.get('devName') == devName:
-                resvDev = i.get('devId')
+                if tag == 'reserve':    # 预约--去json文件获取resvId
+                    resvDev = i.get('devId')
+                elif tag == 'sign':     # 签到--去json文件获取devSn
+                    resvDev = i.get('devSn')
+
         return resvDev
+
 
     # 获取用户 appAccNo
     def get_person_appAccNo(self):
@@ -221,6 +227,7 @@ class ZWYT(object):
                     'end': f"{n_year}-{n_month}-{n_day} {hour[-1]}"     # 明天--结束时间
                 }
             ])
+        
         return reserve_days
 
     # 预约
@@ -229,7 +236,7 @@ class ZWYT(object):
         预约
         """
         # 获取所预约的座位编号
-        self.resvDev = self.get_seat_resvDev(devName)
+        self.resvDev = self.get_seat_resvDev_devSn(devName, 'reserve')
 
         # 登录
         self.get_login_url()
@@ -273,11 +280,7 @@ class ZWYT(object):
 
             # 该时间段有预约了
             elif re.findall('当前时段有预约', message):
-                print(
-                    "\033[0;33m" +
-                    f"{self.name}, 在这个时间段内已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" +
-                    "\033[0m"
-                )
+                print("\033[0;33m" + "当前时段已经有了预约" + "\033[0m")
               
             # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
@@ -299,7 +302,7 @@ class ZWYT(object):
         url = "http://libbooking.gzhu.edu.cn/ic-web/phoneSeatReserve/sign"
 
         # 获取签到用的 devSn
-        devSn = self.get_seat_resvDev(devName)
+        devSn = self.get_seat_resvDev_devSn(devName, 'sign')
 
         # 登录
         res1 = self.rr.post(url=lurl,
@@ -334,7 +337,7 @@ class ZWYT(object):
 
         # 已经签到过
         elif message == '用户已签到，请勿重复签到':
-            print("\033[0;33m" + f'\n {self.name} {message}\n' + "\033[0m")
+            print("\033[0;33m" + f'\n {self.name} 用户已签到, 请勿重复签到\n' + "\033[0m")
 
         # 签到失败
         else:
