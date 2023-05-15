@@ -267,12 +267,16 @@ class ZWYT(object):
             # 预约成功
             if message == '新增成功':
                 print(
-                    colorama.Style.BRIGHT + colorama.Fore.GREEN + f"""\n预约成功: {self.name} 预约了 {devName}: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}""")
+                    colorama.Style.BRIGHT + colorama.Fore.GREEN + 
+                    f"\n预约成功: {self.name} 预约了 {devName}: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}"
+                )
 
             # 该时间段有预约了
             elif re.findall('当前时段有预约', message):
                 print(
-                    colorama.Style.BRIGHT + colorama.Fore.YELLOW + f"""{self.name} 在该时段内已经有预约了 {devName}: 起始时间:{json_data['resvBeginTime']}, 结束时间:{json_data['resvEndTime']}""")
+                    colorama.Style.BRIGHT + colorama.Fore.YELLOW + 
+                    f"{self.name} 在该时段内已经有预约了 {devName}: 起始时间:{json_data['resvBeginTime']}, 结束时间:{json_data['resvEndTime']}"
+                )
 
             elif re.findall('预约时间要大于当前时间', message):
                 print(colorama.Style.BRIGHT + colorama.Fore.YELLOW + '预约时间要大于当前时间')
@@ -280,7 +284,9 @@ class ZWYT(object):
             # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
                 print(
-                    colorama.Style.BRIGHT + colorama.Fore.RED + f"""\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}""")
+                    colorama.Style.BRIGHT + colorama.Fore.RED + 
+                    f"\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}"
+                )
 
     # 签到
     def sign(self, devName):
