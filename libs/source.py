@@ -197,7 +197,7 @@ class ZWYT(object):
         功能: 返回预约的日期和时间
         return: 返回一个列表, 列表里面每个元素是一个字典, 字典里面有每天的 start(开始时间) 和 end(结束时间)
         """
-        # 预约时间段
+        # 预约时间段 
         hours = (
             ('8:30:00', '12:30:00'), 
             ('12:30:00', '16:30:00'), 
@@ -280,7 +280,7 @@ class ZWYT(object):
 
             # 该时间段有预约了
             elif re.findall('当前时段有预约', message):
-                print("\033[0;33m" + "当前时段已经有了预约" + "\033[0m")
+                print("\033[0;33m" + f"这个时段已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" + "\033[0m")
               
             # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
