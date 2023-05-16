@@ -280,7 +280,7 @@ class ZWYT(object):
 
             # 该时间段有预约了
             elif re.findall('当前时段有预约', message):
-                print("\033[0;33m" + f"这个时段已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" + "\033[0m")
+                print("\033[0;33m" + f"{self.name} 这个时段已经有了预约: {json_data['resvBeginTime']} ~ {json_data['resvEndTime']}" + "\033[0m")
               
             # 预约失败---可选择向微信推送预约失败的信息, 比如可以使用 pushplus 平台
             else:
