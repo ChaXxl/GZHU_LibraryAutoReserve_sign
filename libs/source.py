@@ -1,7 +1,7 @@
 import json
 import re
 import typing
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import httpx            # pip install httpx
@@ -205,7 +205,10 @@ class ZWYT(object):
             ('20:30:00', '21:45:00')
         )
 
-        current_day = datetime.now()                # 今天的日期
+        utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)    # UTC 时间
+        SHA_TZ = timezone(timedelta(hours=8),name='Asia/Shanghai',) # 上海市区, 也就是东八区
+        
+        current_day = utc_now.astimezone(SHA_TZ)    # 今天的日期： 北京时间
         next_day = current_day + timedelta(days=1)  # 明天的日期
 
         # 获取 年、月、日
