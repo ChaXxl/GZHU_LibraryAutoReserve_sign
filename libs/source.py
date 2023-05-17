@@ -205,8 +205,8 @@ class ZWYT(object):
             ('20:30:00', '21:45:00')
         )
 
-        utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)    # UTC 时间
-        SHA_TZ = timezone(timedelta(hours=8),name='Asia/Shanghai',) # 上海市区, 也就是东八区
+        utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)     # UTC 时间
+        SHA_TZ = timezone(timedelta(hours=8), name='Asia/Shanghai',) # 上海市区, 也就是东八区，比 UTC 快 8 个小时
         
         current_day = utc_now.astimezone(SHA_TZ)    # 今天的日期： 北京时间
         next_day = current_day + timedelta(days=1)  # 明天的日期
