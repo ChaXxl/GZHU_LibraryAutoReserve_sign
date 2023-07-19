@@ -317,8 +317,13 @@ class ZWYT(object):
 
         # 预约座位的编号不对
         if res1_data.get('data') is None:
-            print("\033[0;31m" + f"{res1_data.get('message')}" + "\033[0m")
-            return
+            print("\033[0;31m" + f"\n{self.name}" + f"{res1_data.get('message')}" + "\033[0m")
+
+            # 预约的不是当前设备, 则签到对应的座位
+            devName = re.findall("-(.*)处", res1_data.get('message'))[0]
+
+            # 调用签到函数进行签到，传入预约座位号
+            self.sign(devName)
 
         # 暂无预约
         if res1_data.get('data').get('reserveInfo') is None:
@@ -342,14 +347,6 @@ class ZWYT(object):
         elif message == '用户已签到，请勿重复签到':
             print("\033[0;33m" + f'\n {self.name} {message}\n' + "\033[0m")
         
-        # 预约的不是当前设备, 则签到对应的座位
-        elif message.find("不是当前设备") != 0:
-            devName = re.findall("-(.*)处", message)[0]
-
-            # 调用签到函数进行签到，传入预约座位号
-            self.sign(devName)
-            
         # 签到失败
         else:
             print("\033[0;31m" + f"\n{self.name}--签到失败--{message}\n" + "\033[0m")
-            
