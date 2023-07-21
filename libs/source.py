@@ -129,6 +129,9 @@ class ZWYT(object):
         """
         登录
         """
+        if self.cookies['ic-cookie']:
+            return
+
         res = self.rr.get(url=self.urls['login_url'])  # 请求登录url获取一些参数
         html = etree.HTML(res.text)
 
