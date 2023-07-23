@@ -330,6 +330,7 @@ class ZWYT(object):
 
             # 调用签到函数进行签到，传入预约座位号
             self.sign(devName)
+            return
 
         # 暂无预约
         if res1_data.get('data').get('reserveInfo') is None:
