@@ -11,7 +11,8 @@ if __name__ == '__main__':
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
     devName = os.getenv('DEVNAME')
-    periods = os.getenv('PERIODS')
+    periods_string = os.getenv('PERIODS')
+    periods = eval(periods_string)
 
     if username and password and devName and periods:
         try:
