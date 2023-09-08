@@ -1,0 +1,28 @@
+name: reserve
+
+on:
+  push:
+    branches: 
+      - master
+  schedule:
+    - cron: '31 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  reserve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+      - name: 'Set up Python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: 'Install requirements'
+        run: pip install -r requirements.txt
+      - name: 'reserve'
+        env:
+          XUHAO: ${{ secrets.XUHAO }}
+          MIMA: ${{ secrets.MIMA }}
+          PUSHPLUS: ${{ secrets.PUSHPLUS }}
+        run: python reserve.py
