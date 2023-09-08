@@ -22,7 +22,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: 'reserve'
         env:
-          XUHAO: ${{ secrets.XUHAO }}
-          MIMA: ${{ secrets.MIMA }}
-          PUSHPLUS: ${{ secrets.PUSHPLUS }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          DEVNAME: ${{ secrets.DEVNAME }}
+          PERIODS: ${{ secrets.PERIODS }}
         run: python reserve.py
