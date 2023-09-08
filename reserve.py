@@ -21,7 +21,6 @@ if __name__ == '__main__':
             yy.reserve(devName)  
         except Exception as e:
             print(e)
-            continue
 
 
 
