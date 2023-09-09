@@ -1,0 +1,30 @@
+name: reserve
+
+on:
+  push:
+    branches: 
+      - main
+      - master
+  schedule:
+    - cron: '31 22 * * *'     #运行的时间，时区问题实际运行+8h，例为每天早上6：31分运行
+  workflow_dispatch:
+
+jobs:
+  reserve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+      - name: 'Set up Python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: 'Install requirements'
+        run: pip install -r requirements.txt
+      - name: 'reserve'
+        env:
+          USERNAME: ${{ secrets.USERNAME }} # 学号
+          PASSWORD: ${{ secrets.PASSWORD }} # 密码
+          DEVNAME: ${{ secrets.DEVNAME }}   # 座位号
+          PERIODS: ${{ secrets.PERIODS }}   # 时间段
+        run: python reserve.py

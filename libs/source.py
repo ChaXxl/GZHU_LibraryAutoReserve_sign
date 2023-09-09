@@ -11,13 +11,14 @@ from .rsa import RSA    # 外部文件
 
 
 class ZWYT(object):
-    def __init__(self, name, username, password):
+    def __init__(self, name, username, password, periods):
         self.resvDev = None                 # 座位编号
         self.roomId = None
         self.cookies = {'ic-cookie': ''}    # 保存登录用的 cookie
         self.name = name                    # 名字
         self.username = str(username)       # 学号
         self.password = str(password)       # 密码
+        self.periods = periods                  # 预约时间段
 
         # url接口
         self.urls = {
@@ -203,13 +204,6 @@ class ZWYT(object):
         功能: 返回预约的日期和时间
         return: 返回一个列表, 列表里面每个元素是一个字典, 字典里面有每天的 start(开始时间) 和 end(结束时间)
         """
-        # 预约时间段 
-        hours = (
-            ('8:30:00', '12:30:00'), 
-            ('12:30:00', '16:30:00'), 
-            ('16:30:00', '20:30:00'), 
-            ('20:30:00', '21:45:00')
-        )
 
         utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)     # UTC 时间
         SHA_TZ = timezone(timedelta(hours=8), name='Asia/Shanghai',) # 上海市区, 也就是东八区，比 UTC 快 8 个小时
@@ -225,15 +219,15 @@ class ZWYT(object):
         reserve_days = []
 
         # 添加起始和结束时间
-        for hour in hours:
+        for period in self.periods:
             reserve_days.extend([
                 {
-                    'start': f"{c_year}-{c_month}-{c_day} {hour[0]}",   # 今天--起始时间
-                    'end': f"{c_year}-{c_month}-{c_day} {hour[-1]}"     # 今天--结束时间
+                    'start': f"{c_year}-{c_month}-{c_day} {period[0]}",   # 今天--起始时间
+                    'end': f"{c_year}-{c_month}-{c_day} {period[-1]}"     # 今天--结束时间
                 },
                 {
-                    'start': f"{n_year}-{n_month}-{n_day} {hour[0]}",   # 明天--起始时间
-                    'end': f"{n_year}-{n_month}-{n_day} {hour[-1]}"     # 明天--结束时间
+                    'start': f"{n_year}-{n_month}-{n_day} {period[0]}",   # 明天--起始时间
+                    'end': f"{n_year}-{n_month}-{n_day} {period[-1]}"     # 明天--结束时间
                 }
             ])
         
