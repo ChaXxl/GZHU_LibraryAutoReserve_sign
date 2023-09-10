@@ -5,8 +5,8 @@ on:
     branches: 
       - main
       - master
-  schedule:
-    - cron: '31 22 * * *'     #运行的时间，时区问题实际运行+8h，例为每天早上6：31分运行
+#  schedule:  # 开启定时需要把这两行前面的“#”删掉
+#    - cron: '31 22 * * *'     #运行的时间，时区问题实际运行+8h，例为每天早上6：31分运行
   workflow_dispatch:
 
 jobs:
