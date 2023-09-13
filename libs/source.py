@@ -3,6 +3,7 @@ import re
 import typing
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import unquote
 
 import httpx            # pip install httpx
 from lxml import etree  # pip install lxml
