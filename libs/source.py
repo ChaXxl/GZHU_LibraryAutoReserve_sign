@@ -156,9 +156,9 @@ class ZWYT(object):
 
         url = f"""{re.findall('service=(.*)', url)[0]}?ticket={ticket}"""
         location = self.rr.get(url=url).headers.get('Location')
-
-        unitoken = re.findall('uniToken=(.*)', str(location))[0]  # 获取unitoken
-        uuid = re.findall('uuid=(.*?)&', str(location))[0]  # 获取 uuid
+        decoded_url = unquote(location)
+        unitoken = re.findall('uniToken=(.*)', str(decoded_url))[0]  # 获取unitoken
+        uuid = re.findall('uuid=(.*?)&', str(decoded_url))[0]  # 获取 uuid
         params = {
             "manager": "false",
             "uuid": uuid,
