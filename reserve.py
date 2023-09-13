@@ -13,7 +13,7 @@ if __name__ == '__main__':
     devName = os.getenv('DEVNAME')
     periods_string = os.getenv('PERIODS')
 
-    if username and password and devName and periods:
+    if username and password and devName and periods_string:
         try:
             # 初始化类示例，传入用户名、密码、时间段
             periods = eval(periods_string)
