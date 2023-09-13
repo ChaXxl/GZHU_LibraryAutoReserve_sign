@@ -12,18 +12,19 @@ if __name__ == '__main__':
     password = os.getenv('PASSWORD')
     devName = os.getenv('DEVNAME')
     periods_string = os.getenv('PERIODS')
-    periods = eval(periods_string)
 
     if username and password and devName and periods:
         try:
             # 初始化类示例，传入用户名、密码、时间段
+            periods = eval(periods_string)
             yy = ZWYT('action', username, password, periods)
             
             # 调用预约函数预约，传入预约座位号
             yy.reserve(devName)  
         except Exception as e:
             print(e)
-
+    else:
+        print("未配置GitHub Action必要参数")
 
 
 
