@@ -1,3 +1,4 @@
 .idea
 /venv/
 /libs/info2.py
+/libs/__pycache__/

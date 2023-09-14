@@ -27,4 +27,5 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }} # 密码
           DEVNAME: ${{ secrets.DEVNAME }}   # 座位号
           PERIODS: ${{ secrets.PERIODS }}   # 时间段
+          PUSHPLUS: ${{ secrets.PUSHPLUS }}
         run: python3 reserve.py
