@@ -9,10 +9,11 @@ if __name__ == '__main__':
     for stu in infos:
         try:
             # 初始化类示例，传入昵称、用户名、密码
-            yy = ZWYT(stu['name'], stu['sno'], stu['pwd'])
+            yy = ZWYT(stu['name'], stu['sno'], stu['pwd'], stu['periods'], stu['pushplus'])
             
             # 调用签到函数进行签到，传入预约座位号
             yy.sign(stu['devName'])
         except Exception as e:
             print(e)
+            yy.pushplus(stu['devName']+"签到失败", e)
             continue
