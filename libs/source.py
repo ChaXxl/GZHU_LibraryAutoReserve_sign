@@ -12,14 +12,15 @@ from .rsa import RSA    # 外部文件
 
 
 class ZWYT(object):
-    def __init__(self, name, username, password, periods):
-        self.resvDev = None                 # 座位编号
+    def __init__(self, name, username, password, periods, pushplus_token):
+        self.resvDev = None                     # 座位编号
         self.roomId = None
-        self.cookies = {'ic-cookie': ''}    # 保存登录用的 cookie
-        self.name = name                    # 名字
-        self.username = str(username)       # 学号
-        self.password = str(password)       # 密码
+        self.cookies = {'ic-cookie': ''}        # 保存登录用的 cookie
+        self.name = name                        # 名字
+        self.username = str(username)           # 学号
+        self.password = str(password)           # 密码
         self.periods = periods                  # 预约时间段
+        self.pushplus_token = pushplus_token    # pushplus的token
 
         # url接口
         self.urls = {
@@ -28,7 +29,8 @@ class ZWYT(object):
             'seatmenu': 'http://libbooking.gzhu.edu.cn/ic-web/seatMenu',        # 获取 roomId
             'findaddress': 'http://libbooking.gzhu.edu.cn/ic-web/auth/address',
             'get_location': 'http://libbooking.gzhu.edu.cn/authcenter/toLoginPage',
-            'userinfo': 'http://libbooking.gzhu.edu.cn/ic-web/auth/userInfo'    # 获取用户信息
+            'userinfo': 'http://libbooking.gzhu.edu.cn/ic-web/auth/userInfo',   # 获取用户信息
+            'pushplus': 'http://www.pushplus.plus/send'                         # pushplus
         }
 
         # xpath 匹配规则
@@ -50,6 +52,15 @@ class ZWYT(object):
 
         # 初始化请求连接对象
         self.rr = httpx.Client()
+
+    # pushplus（ps：整合下面那个的时候记得把这个也放进去XD）
+    def pushplus(self, title, content):
+        params = {
+            'token' : self.pushplus_token,
+            "title" : title,
+            "content" : content
+        }
+        self.rr.get(url=self.urls['pushplus'],  params=params)
 
     # TODO: 整理请求为一个函数
     def get_response(self, url, method, params, headers, data):
@@ -293,6 +304,7 @@ class ZWYT(object):
                     f"\n{self.name}, 时间段: {json_data['resvBeginTime']} 预约失败, {message}" +
                     "\033[0m"
                 )
+                # self.pushplus(f"{self.name}预约失败", message)
             
     # 签到
     def sign(self, devName):
@@ -352,3 +364,4 @@ class ZWYT(object):
         # 签到失败
         else:
             print("\033[0;31m" + f"\n{self.name}--签到失败--{message}\n" + "\033[0m")
+            self.pushplus(f"{self.name}签到失败", message)
