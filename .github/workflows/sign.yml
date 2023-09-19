@@ -1,0 +1,39 @@
+name: sign
+
+on:
+  push:
+    branches: 
+      - main
+      - master
+  schedule:  # 开启定时需要把这几前面的“#”删掉
+    - cron: '31 0 * * *'     #运行的时间，时区问题实际运行+8h，例为每天早上6：31分运行
+    - cron: '32 0 * * *'
+    - cron: '33 0 * * *'
+    - cron: '31 5 * * *'
+    - cron: '32 5 * * *'
+    - cron: '33 5 * * *'
+    - cron: '31 10 * * *'
+    - cron: '31 10 * * *'
+    - cron: '31 10 * * *'
+  workflow_dispatch:
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+      - name: 'Set up Python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: 'Install requirements'
+        run: pip install -r requirements.txt
+      - name: 'sign'
+        env:
+          USERNAME: ${{ secrets.USERNAME }} # 学号
+          PASSWORD: ${{ secrets.PASSWORD }} # 密码
+          DEVNAME: ${{ secrets.DEVNAME }}   # 座位号
+          PERIODS: ${{ secrets.PERIODS }}   # 时间段
+          PUSHPLUS: ${{ secrets.PUSHPLUS }}
+        run: python3 sign.py
