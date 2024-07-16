@@ -1,0 +1,306 @@
+{
+    "code": 0,
+    "message": "查询成功",
+    "data": [
+        {
+            "id": 1,
+            "name": "大学城校区",
+            "totalCount": 3420,
+            "remainCount": 2237,
+            "spanDay": false,
+            "children": [
+                {
+                    "id": 100595328,
+                    "name": "图书馆一楼学习中心",
+                    "totalCount": 469,
+                    "remainCount": 124,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100647013,
+                            "name": "101自修室",
+                            "totalCount": 360,
+                            "remainCount": 117,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100647014,
+                            "name": "103休闲阅览区",
+                            "totalCount": 109,
+                            "remainCount": 7,
+                            "spanDay": false
+                        }
+                    ]
+                },
+                {
+                    "id": 100586576,
+                    "name": "图书馆二楼",
+                    "totalCount": 388,
+                    "remainCount": 243,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100586595,
+                            "name": "202书库",
+                            "totalCount": 88,
+                            "remainCount": 59,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586609,
+                            "name": "203书库",
+                            "totalCount": 48,
+                            "remainCount": 16,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586613,
+                            "name": "204书库",
+                            "totalCount": 44,
+                            "remainCount": 16,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586623,
+                            "name": "205书库",
+                            "totalCount": 76,
+                            "remainCount": 45,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586625,
+                            "name": "206书库",
+                            "totalCount": 132,
+                            "remainCount": 107,
+                            "spanDay": false
+                        }
+                    ]
+                },
+                {
+                    "id": 100586578,
+                    "name": "图书馆三楼",
+                    "totalCount": 826,
+                    "remainCount": 556,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100586629,
+                            "name": "301书库",
+                            "totalCount": 112,
+                            "remainCount": 56,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586631,
+                            "name": "303书库",
+                            "totalCount": 32,
+                            "remainCount": 19,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586633,
+                            "name": "3楼现刊阅览室",
+                            "totalCount": 366,
+                            "remainCount": 321,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586637,
+                            "name": "3楼南面走廊（A区）",
+                            "totalCount": 196,
+                            "remainCount": 132,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586639,
+                            "name": "3楼北面走廊（C区）",
+                            "totalCount": 120,
+                            "remainCount": 28,
+                            "spanDay": false
+                        }
+                    ]
+                },
+                {
+                    "id": 100586580,
+                    "name": "图书馆四楼",
+                    "totalCount": 816,
+                    "remainCount": 636,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100586641,
+                            "name": "401过刊库",
+                            "totalCount": 260,
+                            "remainCount": 235,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586644,
+                            "name": "402书库",
+                            "totalCount": 76,
+                            "remainCount": 65,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586647,
+                            "name": "406书库",
+                            "totalCount": 44,
+                            "remainCount": 31,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586651,
+                            "name": "417书库",
+                            "totalCount": 76,
+                            "remainCount": 59,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586654,
+                            "name": "418书库",
+                            "totalCount": 36,
+                            "remainCount": 28,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586656,
+                            "name": "4楼南面走廊（A区）",
+                            "totalCount": 204,
+                            "remainCount": 164,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586658,
+                            "name": "4楼北面走廊（C区）",
+                            "totalCount": 120,
+                            "remainCount": 54,
+                            "spanDay": false
+                        }
+                    ]
+                },
+                {
+                    "id": 100586583,
+                    "name": "图书馆五楼",
+                    "totalCount": 875,
+                    "remainCount": 668,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100586660,
+                            "name": "501建筑设计书库",
+                            "totalCount": 228,
+                            "remainCount": 209,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586662,
+                            "name": "502外文书库",
+                            "totalCount": 76,
+                            "remainCount": 69,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586665,
+                            "name": "511室工具港澳台廉政书库",
+                            "totalCount": 184,
+                            "remainCount": 126,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100586669,
+                            "name": "513广州文献资源中心",
+                            "totalCount": 191,
+                            "remainCount": 145,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100589684,
+                            "name": "514广州文献资源中心",
+                            "totalCount": 76,
+                            "remainCount": 69,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100646980,
+                            "name": "5楼北面走廊（C区）",
+                            "totalCount": 120,
+                            "remainCount": 50,
+                            "spanDay": false
+                        }
+                    ]
+                },
+                {
+                    "id": 100646239,
+                    "name": "音乐舞蹈学院",
+                    "totalCount": 46,
+                    "remainCount": 10,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100646243,
+                            "name": "琴房",
+                            "totalCount": 46,
+                            "remainCount": 10,
+                            "spanDay": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "桂花岗校区",
+            "totalCount": 577,
+            "remainCount": 561,
+            "spanDay": false,
+            "children": [
+                {
+                    "id": 100595340,
+                    "name": "桂花分馆",
+                    "totalCount": 577,
+                    "remainCount": 561,
+                    "spanDay": false,
+                    "children": [
+                        {
+                            "id": 100595342,
+                            "name": "桂花岗分馆北101室",
+                            "totalCount": 280,
+                            "remainCount": 280,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100647018,
+                            "name": "桂花岗分馆北108室",
+                            "totalCount": 22,
+                            "remainCount": 6,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100647021,
+                            "name": "桂花岗分馆二楼大堂",
+                            "totalCount": 30,
+                            "remainCount": 30,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100647019,
+                            "name": "桂花岗分馆北303室",
+                            "totalCount": 222,
+                            "remainCount": 222,
+                            "spanDay": false
+                        },
+                        {
+                            "id": 100647020,
+                            "name": "桂花岗分馆北403室",
+                            "totalCount": 23,
+                            "remainCount": 23,
+                            "spanDay": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "count": 0,
+    "vals": null
+}

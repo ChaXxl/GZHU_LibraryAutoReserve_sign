@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+./libs/.DS_Store
+/venv/
+/libs/info2.py
+/libs/__pycache__/
+/logs/
