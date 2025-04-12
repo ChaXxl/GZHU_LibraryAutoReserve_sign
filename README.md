@@ -39,11 +39,24 @@
 3. 修改 `libs\info.py`文件，填上自己的学号、密码以及要预约的座位号
 
 4. 运行 `reserve.py`即可预约，运行 `sign.py`可签到
+   - 预约: 
    ~~~shell
    python reserve.py
    ~~~
+   #
+   - 签到info.py中的所有人:
    ~~~shell
    python sign.py
+   ~~~
+   - 签到info.py中指定的几个人, 
+   昵称后随冒号及其cookie(可选)表示指定该签到者的ic-cookie, 从而跳过登录
+   ~~~shell
+   python sign.py 猪猪侠 皮卡丘:cookie
+   ~~~
+   - 签到并缓存登录的ic-cookie, 使得下次签到时跳过登录, cookie过期也会自动更新.
+   这需要运行环境可以创建和更改文件, 云函数, Github Actions一般不满足
+   ~~~shell
+   python sign.py 猪猪侠 皮卡丘 -c [缓存路径和文件名, 默认为cookie_cache]
    ~~~
 
 <br/>

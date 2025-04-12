@@ -13,6 +13,7 @@ def main(*args, **kwargs):
             yy = ZWYT(stu['name'], stu['sno'], stu['pwd'], stu['periods'], stu['pushplus'])
 
             # 调用预约函数预约，传入预约座位号
+            yy.login(force_login = True)
             yy.reserve(stu['devName'])
         except Exception as e:
             print(e)
